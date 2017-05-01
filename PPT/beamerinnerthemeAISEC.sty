@@ -1,0 +1,155 @@
+%
+
+\mode<presentation>
+
+%
+% Title page
+%
+\setbeamertemplate{title page}
+{%
+    \parskip0pt\offinterlineskip%
+    \vbox{%
+        \leftskip=-\beamer@leftmargin%
+        \rightskip=-\beamer@rightmargin%
+        \vskip\beamertopmargin%
+        \vskip-.2cm%
+        \hskip\beamerleftmargin%
+        \begin{minipage}{\dimexpr\paperwidth-\beamerleftmargin-\beamerrightmargin}%
+            \color{fraunhofergreen}\rule{\hsize}{\fraunhoferruleheadlinetop}\par%
+            \vskip.15cm%
+            \color{black}\usebeamerfont{title}\inserttitle\par%
+            \vskip.3cm%
+            \ifextendedtitle%
+                \vskip.15cm%
+                \ifx\insertsubtitle\empty%
+                \else%
+                    \usebeamerfont{subtitle}\insertsubtitle\par%
+                    \vskip.05cm%
+                \fi%
+                \usebeamerfont{author}\insertauthor, \usebeamerfont{date}\insertdate\par%
+                \vskip.05cm%
+            \fi%
+            \color{fraunhofergreen}\rule{\hsize}{\fraunhoferruleheadlinebot}%
+            \vfill%
+        \end{minipage}%
+    }%
+}
+
+%
+% Table of contents
+%
+\defbeamertemplate*{section in toc}{AISEC}
+{%
+    \ifnumbering%
+        \usebeamercolor[fg]{sectionnumber in toc}\inserttocsectionnumber.\ \usebeamercolor[fg]{section in toc}\inserttocsection\par%
+    \else%
+        \usebeamercolor[fg]{sectionnumber in toc}\inserttocsection\par%
+    \fi%
+}
+
+\defbeamertemplate*{subsection in toc}{AISEC}
+{%
+    \ifnumbering%
+        \leftskip=1em\usebeamercolor[fg]{subsectionnumber in toc}\inserttocsectionnumber.\inserttocsubsectionnumber.\ \usebeamercolor[fg]{subsection in toc}\inserttocsubsection\par%
+    \else%
+        \leftskip=1.5em\usebeamercolor[fg]{subsection in toc}\inserttocsubsection\par%
+    \fi%
+}
+
+\defbeamertemplate*{subsubsection in toc}{AISEC}
+{%
+    \usebeamerfont{section in toc}\leftskip=3em%
+    \usebeamerfont{subsubsection in toc}%
+    \ifnumbering%
+        \usebeamercolor[fg]{subsectionnumber in toc}\inserttocsectionnumber.\inserttocsubsectionnumber.\inserttocsubsubsectionnumber.\ \usebeamercolor[fg]{subsection in toc}\inserttocsubsubsection\par%
+    \else%
+        \usebeamercolor[fg]{subsection in toc}\inserttocsubsubsection\par%
+    \fi%
+}
+
+\setbeamertemplate{section in toc shaded}[default][45]
+
+\setbeamertemplate{subsection in toc shaded}[default][25]
+
+\setbeamertemplate{subsection in toc shaded}[default][25]
+
+%
+% Itemize items
+%
+\defbeamertemplate*{itemize item}{AISEC}
+{%
+    \ifusesquares%
+        \tiny\raise1pt\hbox{\donotcoloroutermaths$\blacksquare$}%
+    \else%
+        \scriptsize\raise1.25pt\hbox{\donotcoloroutermaths$\blacktriangleright$}%
+    \fi%
+}
+
+\defbeamertemplate*{itemize subitem}{AISEC}
+{%
+    \ifusesquares%
+        \tiny\raise.75pt\hbox{\donotcoloroutermaths$\blacksquare$}%
+    \else%
+        \tiny\raise1.5pt\hbox{\donotcoloroutermaths$\blacktriangleright$}%
+    \fi%
+}
+
+\defbeamertemplate*{itemize subsubitem}{AISEC}
+{%
+    \ifusesquares%
+        \tiny\raise.75pt\hbox{\donotcoloroutermaths$\blacksquare$}%
+    \else%
+        \tiny\raise1.5pt\hbox{\donotcoloroutermaths$\blacktriangleright$}%
+    \fi%
+}
+
+%
+% Block environments
+%
+\defbeamertemplate*{block begin}{AISEC}
+{%
+    \par\vskip\medskipamount%
+    \centering\hskip-2pt\begin{minipage}{.95\textwidth}
+    \begin{beamerboxesrounded}[upper=block title,lower=block body,shadow=true]%
+    {\raggedright\usebeamerfont*{block title}\insertblocktitle}%
+    \raggedright%
+    \usebeamerfont{block body}%
+}
+
+\defbeamertemplate*{block end}{AISEC}
+{%
+    \end{beamerboxesrounded}\end{minipage}\vskip\smallskipamount%
+}
+
+\defbeamertemplate*{block alerted begin}{AISEC}
+{%
+    \par\vskip\medskipamount%
+    \centering\hskip-2pt\begin{minipage}{.95\textwidth}
+    \begin{beamerboxesrounded}[upper=block title alerted,lower=block body alerted,shadow=true]%
+    {\raggedright\usebeamerfont*{block title alerted}\insertblocktitle}%
+    \raggedright%
+    \usebeamerfont{block body alerted}%
+}
+
+\defbeamertemplate*{block alerted end}{AISEC}
+{%
+    \end{beamerboxesrounded}\end{minipage}\vskip\smallskipamount%
+}
+
+\defbeamertemplate*{block example begin}{AISEC}
+{%
+    \par\vskip\medskipamount%
+    \centering\hskip-2pt\begin{minipage}{.95\textwidth}
+    \begin{beamerboxesrounded}[upper=block title example,lower=block body example,shadow=true]%
+    {\raggedright\usebeamerfont*{block title example}\insertblocktitle}%
+    \raggedright%
+    \usebeamerfont{block body alerted}%
+}
+
+\defbeamertemplate*{block example end}{AISEC}
+{%
+    \end{beamerboxesrounded}\end{minipage}\vskip\smallskipamount%
+}
+
+\mode
+<all>

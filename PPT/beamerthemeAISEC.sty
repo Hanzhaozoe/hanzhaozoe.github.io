@@ -1,0 +1,206 @@
+%
+
+\mode<presentation>
+
+%
+% Define some boolean options
+%
+\newif\ifinfoline % Display the title, author, date and page number in the footline
+\infolinetrue
+\newif\ifnumbering % Enable automatic numbering of frametitle and framesubtitle according to the sectioning
+\numberingfalse
+\newif\ifusesquares % Use squares for itemize instead of triangles
+\usesquarestrue
+\newif\ifextendedtitle % Print subtitle, author and date an title page
+\extendedtitletrue
+\newif\ifconfidential % Print confidential string in the infoline
+\confidentialfalse
+
+%
+% Define outer margins for the slides
+%
+\newlength{\beamerleftmargin}
+\newlength{\beamerrightmargin}
+\newlength{\beamertopmargin}
+\newlength{\beamerbotmargin}
+\setlength{\beamerleftmargin}{.5cm}
+\setlength{\beamerrightmargin}{\beamerleftmargin}
+\setlength{\beamertopmargin}{.4cm}
+\setlength{\beamerbotmargin}{.4cm}
+
+\setbeamersize{text margin left=\beamerleftmargin}
+\setbeamersize{text margin right=\beamerrightmargin}
+\setbeamersize{sidebar width left=0cm}
+\setbeamersize{sidebar width right=0cm}
+
+%
+% Define thickness of the Fraunhofer rules in the head- and footline
+%
+\newlength{\fraunhoferruleheadlinetop}
+\newlength{\fraunhoferruleheadlinebot}
+\newlength{\fraunhoferrulefootline}
+\setlength{\fraunhoferruleheadlinetop}{.6mm}
+\setlength{\fraunhoferruleheadlinebot}{.3mm}
+\setlength{\fraunhoferrulefootline}{.3mm}
+
+%
+% Load theme files
+%
+\usefonttheme{AISEC}
+\usecolortheme{AISEC}
+\useinnertheme{AISEC}
+\useoutertheme{AISEC}
+
+%
+% Set headline template
+%
+\frametitle{\ } % Dummy instruction to make \setbeamertemplate{} work (macro needs frametitle and framesubtitle to be defined)
+\framesubtitle{\ } % See above
+\setbeamertemplate{headline}[normal]
+
+%
+% Define new commands to insert text into the contact information page
+%
+\long\def\name#1{%
+    \def\insertname{#1}%
+}
+\name{}
+
+\long\def\department#1{%
+    \def\insertdepartment{#1}%
+}
+\department{}
+
+\long\def\address#1{%
+    \def\insertaddress{#1}%
+}
+\address{}
+
+\long\def\phone#1{%
+    \def\insertphone{#1}%
+}
+\phone{}
+
+\long\def\fax#1{%
+    \def\insertfax{#1}%
+}
+\fax{}
+
+\long\def\email#1{%
+    \def\insertemail{#1}%
+}
+\email{}
+
+\long\def\web#1{%
+    \def\insertweb{#1}%
+}
+\web{}
+
+%
+% Define macros to create the contact information page
+%
+\def\tabitem#1#2{%
+    #1: \> \parbox[t]{5cm}{#2} \\%
+}
+
+\def\maketabbingenv{%
+    \sbox0{\insertaddress\insertweb\insertphone\insertfax\insertemail}\ifdim\wd0=0pt%
+    \else%
+        \begin{tabbing}%
+            \hspace*{1.2cm}\=\kill%
+            \ifx\insertaddress\empty%
+            \else%
+                \tabitem{Address}{\insertaddress}%
+            \fi%
+            \ifx\insertweb\empty%
+            \else%
+                \tabitem{Internet}{\insertweb}%
+            \fi%
+            \setbox1=\hbox{\insertaddress\insertweb}\ifdim\wd1=0pt%
+            \else%
+                \sbox2{\insertphone\insertfax\insertemail}\ifdim\wd2=0pt%
+                \else%
+                    \\%
+                \fi%
+            \fi%
+            \ifx\insertphone\empty%
+            \else%
+                \tabitem{Phone}{\insertphone}%
+            \fi%
+            \ifx\insertfax\empty%
+            \else%
+                \tabitem{Fax}{\insertfax}%
+            \fi%
+            \ifx\insertemail\empty%
+            \else%
+                \tabitem{E-Mail}{\insertemail}%
+            \fi%
+        \end{tabbing}%
+        \vspace*{-.8cm}%
+    \fi%
+}
+
+\def\contactpage
+{%
+    \usebeamerfont{contact}%
+    \begin{columns}[c]%
+        \begin{column}{.39\textwidth}%
+            \includegraphics[scale=.5]{aisec_building.pdf}%
+        \end{column}%
+        \begin{column}{.56\textwidth}%
+            \ifx\insertname\empty%
+            \else%
+                \insertname\par\vskip\baselineskip%
+            \fi%
+            \ifx\insertdepartment\empty%
+            \else%
+                \insertdepartment\par\vskip\baselineskip%
+            \fi%
+            \ifx\insertinstitute\empty%
+            \else%
+                \insertinstitute%
+            \fi%
+            \maketabbingenv%
+        \end{column}%
+    \end{columns}%
+}
+
+%
+% Define new environments for titlepage, outline, bibliography and contact page
+%
+\newenvironment{titleframe}[1][]{%
+    \makeatletter%
+    \setbeamertemplate{headline}[empty]%
+    \setbeamertemplate{footline}[empty]%
+    \def\beamer@entrycode{\vspace*{-\headheight}}%
+    \makeatother%
+    \begin{frame}[environment=titleframe,t,#1]%
+}{%
+    \end{frame}%
+    \addtocounter{framenumber}{-1}%
+}
+
+\newenvironment{outlineframe}[1][]{%
+    \setbeamertemplate{headline}[outline]%
+    \begin{frame}[environment=outlineframe,#1]%
+}{%
+    \end{frame}%
+}
+
+\newenvironment{bibliographyframe}[1][]{%
+    \setbeamertemplate{headline}[bibliography]%
+    \begin{frame}[environment=bibliographyframe,#1]%
+}{%
+    \end{frame}%
+}
+
+\newenvironment{contactframe}[1][]{%
+    \begin{frame}[environment=contactframe,c,#1]%
+    \frametitle{\iflanguage{ngerman}{Kontaktinformation}{\iflanguage{german}{Kontaktinformation}{Contact Information}}}%
+    \framesubtitle{\ }%
+}{%
+    \end{frame}%
+}
+
+\mode
+<all>
