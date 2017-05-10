@@ -1,0 +1,11 @@
+\select@language {english}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Concept}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Motivation}{5}{0}{1}
+\beamer@sectionintoc {2}{The construction of the authentication system}{8}{0}{2}
+\beamer@subsectionintoc {2}{1}{Enrollment phase}{9}{0}{2}
+\beamer@subsectionintoc {2}{2}{Authentication phase}{10}{0}{2}
+\beamer@sectionintoc {3}{Conclusion}{16}{0}{3}
+\beamer@sectionintoc {4}{Schedule}{18}{0}{4}
+\beamer@sectionintoc {5}{Bibliography}{20}{0}{5}
+\beamer@sectionintoc {6}{Discussion}{22}{0}{6}
